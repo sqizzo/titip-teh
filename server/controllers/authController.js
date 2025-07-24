@@ -113,6 +113,7 @@ const getProfile = async (req, res, next) => {
     const user = req.user;
     res.status(200).json({
       success: true,
+      message: "Berhasil mendapatkan data user",
       user: {
         id: user._id,
         name: user.name,
