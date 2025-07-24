@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 
 // Import Routes
 const auth = require("./routes/auth");
+const admin = require("./routes/admin");
 
 // Initialize port
 const PORT = process.env.PORT || 3000;
@@ -39,6 +40,7 @@ app.use(cookieParser());
 
 // Routes
 app.use("/auth", auth);
+app.use("/admin", admin);
 
 // Check base url
 app.get("/", (req, res) => {
