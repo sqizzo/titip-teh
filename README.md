@@ -1,6 +1,6 @@
 Buat .env server bisa liat contoh di .env.example yak
 
-![Haha](https://i.ibb.co/twHrxtYf/a16kbe.png)
+![Haha](https://i.imgur.com/VaSqG0T.png)
 
 Jalanin:
 
