@@ -7,11 +7,18 @@ const morgan = require("morgan");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
 
+// Import Routes
+const auth = require("./routes/auth");
+
 // Initialize port
 const PORT = process.env.PORT || 3000;
 
 // Initialize express app
 const app = express();
+
+// Pake passport buat auth
+app.use(passport.initialize());
+require("./config/passport")(passport);
 
 // Pake cors
 app.use(
@@ -30,9 +37,12 @@ app.use(express.json());
 // Biar cookie disimpen
 app.use(cookieParser());
 
+// Routes
+app.use("/auth", auth);
+
 // Check base url
 app.get("/", (req, res) => {
-  res.send("Evently API ready!");
+  res.send("Titip Teh API ready!");
 });
 
 // Catch error kalau udah mumet pol
