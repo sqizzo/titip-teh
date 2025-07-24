@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const User = require("../models/User");
 
 // @desc    Approve akun
@@ -5,6 +6,13 @@ const User = require("../models/User");
 // @access  Private, Admin-only
 const approveUser = async (req, res, next) => {
   const id = req.params.id;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({
+      success: false,
+      message: "ID tidak valid",
+    });
+  }
 
   try {
     const user = await User.findById(id);
@@ -45,6 +53,13 @@ const approveUser = async (req, res, next) => {
 // @access  Private, Admin-only
 const rejectUser = async (req, res, next) => {
   const id = req.params.id;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({
+      success: false,
+      message: "ID tidak valid",
+    });
+  }
 
   try {
     const user = await User.findById(id);
