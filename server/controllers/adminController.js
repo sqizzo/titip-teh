@@ -1,5 +1,8 @@
 const User = require("../models/User");
 
+// @desc    Approve akun
+// @route   PATCH /admin/users/:id/approve
+// @access  Private, Admin-only
 const approveUser = async (req, res, next) => {
   const id = req.params.id;
 
@@ -37,6 +40,9 @@ const approveUser = async (req, res, next) => {
   }
 };
 
+// @desc    Reject akun
+// @route   PATCH /admin/users/:id/reject
+// @access  Private, Admin-only
 const rejectUser = async (req, res, next) => {
   const id = req.params.id;
 
