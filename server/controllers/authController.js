@@ -71,6 +71,13 @@ const login = async (req, res, next) => {
       });
     }
 
+    if (user.status !== "approved") {
+      return res.status(400).json({
+        success: false,
+        message: "Akun belum ter-approve",
+      });
+    }
+
     const token = generateToken(user);
 
     // Simpan token di cookie (ga lewat response, nanti FE akses cookie nya)
