@@ -9,31 +9,15 @@ const checkAdminRole = require("../middlewares/checkAdminRole");
 
 // Import Controller
 const { approveUser, rejectUser } = require("../controllers/adminController");
-const { addMenu } = require("../controllers/menuController");
 
-// @route   GET /admin/users/:id/approve
+// @route   GET users/:id/approve
 // @access  Private, Admin Only
 // @middleware checkAuthentication, checkAdminRole
-router.patch(
-  "/users/:id/approve",
-  checkAuthentication,
-  checkAdminRole,
-  approveUser
-);
+router.patch("/:id/approve", checkAuthentication, checkAdminRole, approveUser);
 
-// @route   GET /admin/users/:id/reject
+// @route   GET users/:id/reject
 // @access  Private, Admin Only
 // @middleware checkAuthentication, checkAdminRole
-router.patch(
-  "/users/:id/reject",
-  checkAuthentication,
-  checkAdminRole,
-  rejectUser
-);
-
-// @route   POST /admin/menu/add
-// @access  Private, Admin Only
-// @middleware checkAuthentication, checkAdminRole
-router.post("/menu/add", checkAuthentication, checkAdminRole, addMenu);
+router.patch("/:id/reject", checkAuthentication, checkAdminRole, rejectUser);
 
 module.exports = router;

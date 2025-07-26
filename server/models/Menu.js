@@ -16,7 +16,18 @@ const menuSchema = new mongoose.Schema({
   },
   description: {
     type: String,
+    default: "",
+  },
+  menuType: {
+    type: String,
+    enum: ["makanan", "minuman"],
+    default: "makanan",
+  },
+  restaurant: {
+    type: mongoose.Types.ObjectId,
+    ref: "Restaurant",
+    required: true,
   },
 });
 
-module.exports = mongoose.model({ menuSchema });
+module.exports = mongoose.model("Menu", menuSchema);
