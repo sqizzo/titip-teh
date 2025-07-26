@@ -57,7 +57,7 @@ const login = async (req, res, next) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(404).json({
+      return res.status(401).json({
         success: false,
         message: "Email/password salah",
       });
@@ -65,7 +65,7 @@ const login = async (req, res, next) => {
 
     const isMatch = await user.matchPassword(password);
     if (!isMatch) {
-      return res.status(404).json({
+      return res.status(401).json({
         success: false,
         message: "Email/password salah",
       });

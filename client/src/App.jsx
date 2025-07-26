@@ -1,10 +1,25 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
+
+// Import Pages
+import Login from "./pages/Login";
+import Welcome from "./pages/Welcome";
+import MainLayout from "./components/layout/MainLayout";
+import { useSelector } from "react-redux";
 
 const App = () => {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
   return (
-    <div className="bg-blue-200 font-display">
-      <h1>Hello from Tailwind</h1>
-    </div>
+    <Routes>
+      <Route element={<MainLayout />}>
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/"
+          element={isLoggedIn ? <div>Logged In</div> : <Welcome />}
+        />
+      </Route>
+    </Routes>
   );
 };
 
