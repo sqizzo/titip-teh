@@ -19,9 +19,9 @@ router.post("/register", register);
 // @route POST /auth/login
 router.post("/login", login);
 
-// @route   GET /api/auth/profile
+// @route   GET /auth/profile
 // @access  Private
-// @middleware passport.authenticate("jwt")
+// @middleware checkAuthentication
 router.get("/profile", checkAuthentication, getProfile);
 
 module.exports = router;
