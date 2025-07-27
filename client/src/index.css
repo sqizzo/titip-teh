@@ -4,3 +4,19 @@
 @theme {
   --font-display: "Gabarito", sans-serif;
 }
+
+.canvas-base {
+  @apply w-full min-h-screen flex p-8 text-gray-800 flex-col bg-slate-50;
+}
+
+.bottom-bar-btn {
+  @apply cursor-pointer p-3 rounded-full bg-indigo-400/50 h-fit text-indigo-800 border-2 hover:border-indigo-800 transition-all;
+}
+
+.bottom-active {
+  @apply border-indigo-800;
+}
+
+.bottom-inactive {
+  @apply border-transparent;
+}

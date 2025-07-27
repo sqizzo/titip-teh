@@ -9,13 +9,14 @@ import LoginForm from "../components/forms/LoginForm";
 import { ArrowLeft } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../store/authSlice";
+import { useToast } from "../context/ToastContext";
 
 const serverUrl = import.meta.env.VITE_SERVER_URL;
 
 const Login = () => {
   const navigate = useNavigate();
-  const { showToast } = useOutletContext();
   const dispatch = useDispatch();
+  const { showToast } = useToast();
 
   const handleLogin = async (formData) => {
     try {
@@ -42,7 +43,7 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full h-screen flex p-8 gap-8 text-gray-800 flex-col bg-slate-50">
+    <div className="canvas-base gap-4">
       {/* Navigation */}
       <button
         className="cursor-pointer text-slate-600/50 bg-slate-200/50 rounded-full w-fit p-2"

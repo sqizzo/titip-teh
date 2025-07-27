@@ -5,7 +5,7 @@ import WelcomeIllustration from "../assets/welcome_illustration.png";
 
 const Welcome = () => {
   return (
-    <div className="w-full h-screen flex p-8 gap-2 text-gray-800 flex-col bg-slate-50 items-center">
+    <div className="canvas-base items-center gap-2">
       {/* Logo */}
       <span className="text-lg font-extrabold text-indigo-500">TitipTeh!</span>
       {/* Illustration */}

@@ -26,7 +26,6 @@ export const Toast = ({
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(false);
-      handleClose();
     }, duration);
   }, []);
 
@@ -36,9 +35,9 @@ export const Toast = ({
 
   return (
     <span
-      className={`fixed right-4 top-4 px-4 py-2 text-xs rounded-md border-1 w-70 ${typeColor[type]} flex transition-all`}
+      className={`fixed right-4 top-4 px-4 py-2 text-xs rounded-md border-1 w-70 ${typeColor[type]} flex transition-all z-100`}
     >
-      <div className="flex flex-col gap-1 grow">
+      <div className="flex flex-col grow">
         {title && <h3 className="font-bold">{title}</h3>}
         <p>{message ?? "toast message"}</p>
       </div>
