@@ -20,3 +20,11 @@
 .bottom-inactive {
   @apply border-transparent;
 }
+
+.page-title {
+  @apply text-4xl font-bold;
+}
+
+.page-subtitle {
+  @apply text-slate-400;
+}

@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
-// API
-import axios from "axios";
-
 // Components
 import LoginForm from "../components/forms/LoginForm";
 import { ArrowLeft } from "lucide-react";
@@ -11,7 +8,8 @@ import { useDispatch } from "react-redux";
 import { loginSuccess } from "../store/authSlice";
 import { useToast } from "../context/ToastContext";
 
-const serverUrl = import.meta.env.VITE_SERVER_URL;
+// API
+import { loginUser } from "../api/authApi";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -20,7 +18,7 @@ const Login = () => {
 
   const handleLogin = async (formData) => {
     try {
-      const response = await axios.post(`${serverUrl}/auth/login`, formData);
+      const response = await loginUser(formData);
 
       showToast({
         type: "success",
@@ -29,7 +27,13 @@ const Login = () => {
       });
 
       localStorage.setItem("token", response.data.token);
-      dispatch(loginSuccess(response.data.token));
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      dispatch(
+        loginSuccess({
+          token: response.data.token,
+          user: { ...response.data.user },
+        })
+      );
       navigate("/");
     } catch (err) {
       const msg =
@@ -43,7 +47,7 @@ const Login = () => {
   };
 
   return (
-    <div className="canvas-base gap-4">
+    <div className="canvas-base gap-12">
       {/* Navigation */}
       <button
         className="cursor-pointer text-slate-600/50 bg-slate-200/50 rounded-full w-fit p-2"
@@ -54,9 +58,9 @@ const Login = () => {
       </button>
 
       {/* Greeting */}
-      <div className="flex gap-6 flex-col text-center items-center">
-        <h1 className="text-4xl font-bold">Login Dulu Yaa!</h1>
-        <p className="text-center text-slate-400 w-md text-md">
+      <div className="flex gap-4 flex-col text-center items-center">
+        <h1 className="page-title">Login Dulu Yaa!</h1>
+        <p className="page-subtitle w-xs text-sm text-center">
           Laper? Log in dulu biar bisa pesen makan yaa!
         </p>
       </div>

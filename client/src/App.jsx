@@ -11,6 +11,9 @@ import GuestRoute from "./routes/GuestRoute";
 import { ToastProvider } from "./context/ToastContext";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import { NotFound } from "./pages/NotFound";
+import Profile from "./pages/Profile";
+import AdminRoute from "./routes/AdminRoute";
+import Admin from "./pages/admin/Admin";
 
 const App = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -20,9 +23,6 @@ const App = () => {
       <Routes>
         {/* Public Pages */}
         <Route element={<MainLayout />}>
-          {/* Home */}
-          <Route path="/" element={isLoggedIn ? <Home /> : <Welcome />} />
-
           {/* Login */}
           <Route
             path="/login"
@@ -33,12 +33,27 @@ const App = () => {
             }
           />
 
+          {/* Welcome */}
+          <Route
+            path="/welcome"
+            element={
+              <GuestRoute>
+                <Welcome />
+              </GuestRoute>
+            }
+          />
+
           {/* Protected Pages */}
           <Route element={<ProtectedRoute />}>
+            <Route path="/" element={<Home />} />
+            {/* Home */}
             {/* Orders */}
             <Route path="/orders" element={<>orders</>}></Route>
             {/* Profile */}
-            <Route path="/profile" element={<>profile</>}></Route>
+            <Route path="/profile" element={<Profile />}></Route>
+            <Route element={<AdminRoute />}>
+              <Route path="/admin" element={<Admin />} />
+            </Route>
           </Route>
 
           {/* Not Found (404) */}

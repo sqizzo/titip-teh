@@ -13,7 +13,7 @@ export const ToastProvider = ({ children }) => {
 
   return (
     <ToastContext.Provider value={{ showToast }}>
-      <div className="relative">
+      <div className="relative overflow-hidden">
         {toast && <Toast {...toast} onClose={closeToast} />}
         {children}
       </div>

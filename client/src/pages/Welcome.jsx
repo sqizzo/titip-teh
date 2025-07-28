@@ -15,11 +15,9 @@ const Welcome = () => {
         className="w-60"
       />
       {/* Text */}
-      <div className="flex flex-col gap-4 mt-4 items-center">
-        <h1 className="text-4xl font-bold text-center w-xs">
-          Selamat Datang di Titip Teh!
-        </h1>
-        <p className="text-center text-slate-400 w-md">
+      <div className="flex flex-col gap-4 mt-4 items-center text-center">
+        <h1 className="page-title w-xs">Selamat Datang di Titip Teh!</h1>
+        <p className="page-subtitle w-xs text-sm">
           Pesan makanan dengan praktis dan efisien! Ga perlu repot pergi ke luar
           dan cukup nikmati makananmu!
         </p>
