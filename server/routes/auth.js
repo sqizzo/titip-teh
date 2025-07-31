@@ -1,8 +1,10 @@
 const express = require("express");
-const passport = require("passport");
 
 // Inisialisasi Router
 const router = express.Router();
+
+// Import Middleware
+const checkAuthentication = require("../middlewares/checkAuthentication");
 
 // Import Controller
 const {
@@ -17,13 +19,9 @@ router.post("/register", register);
 // @route POST /auth/login
 router.post("/login", login);
 
-// @route   GET /api/auth/profile
+// @route   GET /auth/profile
 // @access  Private
-// @middleware passport.authenticate("jwt")
-router.get(
-  "/profile",
-  passport.authenticate("jwt", { session: false }),
-  getProfile
-);
+// @middleware checkAuthentication
+router.get("/profile", checkAuthentication, getProfile);
 
 module.exports = router;
