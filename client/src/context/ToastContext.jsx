@@ -8,7 +8,9 @@ export const useToast = () => useContext(ToastContext);
 export const ToastProvider = ({ children }) => {
   const [toast, setToast] = useState(null);
 
-  const showToast = (data) => setToast(data);
+  const showToast = (data) => {
+    setToast(data);
+  };
   const closeToast = () => setToast(null);
 
   return (

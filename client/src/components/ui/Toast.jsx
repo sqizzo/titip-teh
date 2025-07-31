@@ -26,7 +26,11 @@ export const Toast = ({
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(false);
+      if (onClose) {
+        onClose();
+      }
     }, duration);
+    return () => clearTimeout(timer);
   }, []);
 
   if (!isVisible) {

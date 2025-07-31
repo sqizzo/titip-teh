@@ -108,7 +108,7 @@ const Home = () => {
               {isLoading ? (
                 <PulseLoader size={8} color="#4f39f6" />
               ) : (
-                "Cannot Fetch Menus"
+                "Tidak Ada Menu"
               )}
             </p>
           )}

@@ -95,4 +95,27 @@ const rejectUser = async (req, res, next) => {
   }
 };
 
-module.exports = { approveUser, rejectUser };
+// @desc    Get semua user
+// @route   GET /admin/users
+// @access  Private, Admin-only
+const getAllUsers = async (req, res, next) => {
+  try {
+    const users = await User.find({ role: { $ne: "admin" } }).select(
+      "-password"
+    ); // jangan kirim password
+    res.status(200).json({
+      success: true,
+      users: users.map((u) => ({
+        id: u._id,
+        name: u.name,
+        email: u.email,
+        role: u.role,
+        status: u.status,
+      })),
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { approveUser, rejectUser, getAllUsers };

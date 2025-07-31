@@ -14,53 +14,68 @@ import { NotFound } from "./pages/NotFound";
 import Profile from "./pages/Profile";
 import AdminRoute from "./routes/AdminRoute";
 import Admin from "./pages/admin/Admin";
+import Register from "./pages/Register";
+import Users from "./pages/admin/Users";
+import AddRestaurant from "./pages/admin/restaurants/AddRestaurant";
+import Restaurants from "./pages/admin/restaurants/Restaurants";
 
 const App = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   return (
-    <ToastProvider>
-      <Routes>
-        {/* Public Pages */}
-        <Route element={<MainLayout />}>
-          {/* Login */}
-          <Route
-            path="/login"
-            element={
-              <GuestRoute>
-                <Login />
-              </GuestRoute>
-            }
-          />
+    <Routes>
+      {/* Public Pages */}
+      <Route element={<MainLayout />}>
+        {/* Login */}
+        <Route
+          path="/login"
+          element={
+            <GuestRoute>
+              <Login />
+            </GuestRoute>
+          }
+        />
 
-          {/* Welcome */}
-          <Route
-            path="/welcome"
-            element={
-              <GuestRoute>
-                <Welcome />
-              </GuestRoute>
-            }
-          />
+        {/* Register */}
+        <Route
+          path="/register"
+          element={
+            <GuestRoute>
+              <Register />
+            </GuestRoute>
+          }
+        />
 
-          {/* Protected Pages */}
-          <Route element={<ProtectedRoute />}>
-            <Route path="/" element={<Home />} />
-            {/* Home */}
-            {/* Orders */}
-            <Route path="/orders" element={<>orders</>}></Route>
-            {/* Profile */}
-            <Route path="/profile" element={<Profile />}></Route>
-            <Route element={<AdminRoute />}>
-              <Route path="/admin" element={<Admin />} />
-            </Route>
+        {/* Welcome */}
+        <Route
+          path="/welcome"
+          element={
+            <GuestRoute>
+              <Welcome />
+            </GuestRoute>
+          }
+        />
+
+        {/* Protected Pages */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/" element={<Home />} />
+          {/* Home */}
+          {/* Orders */}
+          <Route path="/orders" element={<>orders</>}></Route>
+          {/* Profile */}
+          <Route path="/profile" element={<Profile />}></Route>
+          <Route element={<AdminRoute />}>
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/users" element={<Users />} />
+            <Route path="/admin/restaurants" element={<Restaurants />} />
+            <Route path="/admin/restaurants/add" element={<AddRestaurant />} />
           </Route>
-
-          {/* Not Found (404) */}
-          <Route path="*" element={<NotFound />} />
         </Route>
-      </Routes>
-    </ToastProvider>
+
+        {/* Not Found (404) */}
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 };
 

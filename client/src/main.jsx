@@ -11,6 +11,7 @@ import "./index.css";
 
 // State management with redux
 import { Provider } from "react-redux";
+import { ToastProvider } from "./context/ToastContext.jsx";
 import { store } from "./store/store.js";
 
 import App from "./App.jsx";
@@ -18,9 +19,11 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     {/* Untuk access redux state secara global */}
     <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <ToastProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ToastProvider>
     </Provider>
   </StrictMode>
 );
