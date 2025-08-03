@@ -12,6 +12,7 @@ const auth = require("./routes/auth");
 const users = require("./routes/users");
 const restaurants = require("./routes/restaurants");
 const menus = require("./routes/menus");
+const orders = require("./routes/orders");
 
 // Initialize port
 const PORT = process.env.PORT || 3000;
@@ -45,6 +46,7 @@ app.use("/auth", auth);
 app.use("/users", users);
 app.use("/restaurants", restaurants);
 app.use("/menus", menus);
+app.use("/orders", orders);
 
 // Check base url
 app.get("/", (req, res) => {
