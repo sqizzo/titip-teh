@@ -72,7 +72,7 @@ const login = async (req, res, next) => {
     }
 
     if (user.status !== "approved") {
-      return res.status(400).json({
+      return res.status(403).json({
         success: false,
         message: "Akun belum ter-approve",
       });

@@ -190,7 +190,7 @@ const getRestaurants = async (req, res, next) => {
   try {
     const restaurant = await Restaurant.find();
 
-    res.status(201).json({
+    res.status(200).json({
       success: true,
       message: "Berhasil mencari restoran",
       restaurant,

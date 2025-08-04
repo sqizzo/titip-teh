@@ -32,7 +32,7 @@ const Welcome = () => {
         </a>
         <span className="text-sm my-2 text-slate-400">atau</span>
         <a
-          href="#"
+          href="/register"
           className="w-full border-transparent border-2 text-indigo-500 bg-indigo-500/20 px-4 py-3 rounded-md  transition-all font-medium hover:border-indigo-500 hover:border-2"
         >
           Daftar Sekarang!

@@ -1,11 +1,10 @@
 import React from "react";
 import { Ham, Plus, CupSoda } from "lucide-react";
 
-const MenuCard = ({ id, menuType, name, restaurantName, price }) => {
+const MenuCard = ({ id, menuType, name, restaurantName, price, onAddToCart }) => {
   return (
-    <a
+    <div
       key={id}
-      href={`/menus/${id}`}
       className="flex flex-col p-3 bg-white rounded-md shadow-sm items-center w-full"
     >
       <div className="bg-indigo-100 rounded-lg flex justify-center items-center p-4 w-full aspect-square">
@@ -25,10 +24,13 @@ const MenuCard = ({ id, menuType, name, restaurantName, price }) => {
           Rp. {price?.toLocaleString("id-ID") ?? "N/A"}
         </span>
       </div>
-      <button className="cursor-pointer bg-indigo-500 rounded-full size-8 flex items-center justify-center text-white shadow-md hover:bg-indigo-600 transition-colors duration-200 self-end">
+      <button 
+        onClick={() => onAddToCart({ id, name, price, restaurantName, menuType })}
+        className="cursor-pointer bg-indigo-500 rounded-full size-8 flex items-center justify-center text-white shadow-md hover:bg-indigo-600 transition-colors duration-200 self-end"
+      >
         <Plus size={20} />
       </button>
-    </a>
+    </div>
   );
 };
 
