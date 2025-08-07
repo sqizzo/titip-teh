@@ -1,67 +1,42 @@
 const express = require("express");
 const router = express.Router();
-const Order = require("../models/Orders");
 
-// Create Order
-router.post("/", async (req, res) => {
-  try {
-    const order = new Order(req.body);
-    const savedOrder = await order.save();
-    res.status(201).json(savedOrder);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-});
+// Import Middleware
+const checkAuthentication = require("../middlewares/checkAuthentication");
+const checkAdminRole = require("../middlewares/checkAdminRole");
 
-// Get All Orders
-router.get("/", async (req, res) => {
-  try {
-    const orders = await Order.find().populate("user").populate("items.menus");
-    res.json(orders);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+// Import Controller
+const {
+  createOrder,
+  getUserOrders,
+  getAllOrders,
+  updateOrderStatus,
+  getOrderById,
+  cancelOrder,
+} = require("../controllers/orderController");
 
-// Get Order by ID
-router.get("/:id", async (req, res) => {
-  try {
-    const order = await Order.findById(req.params.id)
-      .populate("user")
-      .populate("items.menus");
-    if (!order) return res.status(404).json({ error: "Order not found" });
-    res.json(order);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+// @route   POST /orders
+// @access  Private
+router.post("/", checkAuthentication, createOrder);
 
-// Update Order
-router.put("/:id", async (req, res) => {
-  try {
-    const updatedOrder = await Order.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
-    if (!updatedOrder)
-      return res.status(404).json({ error: "Order not found" });
-    res.json(updatedOrder);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-});
+// @route   GET /orders
+// @access  Private
+router.get("/", checkAuthentication, getUserOrders);
 
-// Delete Order
-router.delete("/:id", async (req, res) => {
-  try {
-    const deletedOrder = await Order.findByIdAndDelete(req.params.id);
-    if (!deletedOrder)
-      return res.status(404).json({ error: "Order not found" });
-    res.json({ message: "Order deleted" });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+// @route   GET /orders/all
+// @access  Private, Admin only
+router.get("/all", checkAuthentication, checkAdminRole, getAllOrders);
+
+// @route   GET /orders/:id
+// @access  Private
+router.get("/:id", checkAuthentication, getOrderById);
+
+// @route   PATCH /orders/:id/status
+// @access  Private, Admin only
+router.patch("/:id/status", checkAuthentication, checkAdminRole, updateOrderStatus);
+
+// @route   PATCH /orders/:id/cancel
+// @access  Private
+router.patch("/:id/cancel", checkAuthentication, cancelOrder);
 
 module.exports = router;
